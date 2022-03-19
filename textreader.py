@@ -23,10 +23,10 @@ def files_Creation():
         # Video to take screenshots of for processing   
     return(src_vid)
 
-start = (55, 970)
-end = (450, 934)
-color = (0, 255, 0)
-thickness = 1
+x = 55
+y = 934
+h = 36
+w = 395
 
 def gen_Img(src_vid):
     index = 0
@@ -36,17 +36,16 @@ def gen_Img(src_vid):
     
     while (1):
         ret, frame = src_vid.read()
-        display = cv2.rectangle(frame.copy(), start, end, color, thickness)
-        ROI = frame[934:970, 55:450].copy()
         
         if not ret:
             break
 
         name = './image/frame' + str(index) + '.png'
             # This will be the naming convention for the screenshots
-        if index % 400 == 0:
+        if index % 1800 == 0:
             print("capturing..." + name)
-            cv2.imwrite(name, ROI)
+            #crop = frame[y:y+h, x:x+w]
+            cv2.imwrite(name, frame)
         index = index + 1
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
