@@ -1,6 +1,7 @@
 from PIL import Image
 from matplotlib import image
 import pytesseract
+import pyautogui
 import os
 import cv2
 import numpy as np
@@ -22,18 +23,30 @@ def files_Creation():
         # Video to take screenshots of for processing   
     return(src_vid)
 
+start = (55, 970)
+end = (450, 934)
+color = (0, 255, 0)
+thickness = 1
+
 def gen_Img(src_vid):
     index = 0
-    while src_vid.isOpened():
+    if not src_vid.isOpened():
+        print("could not open src_vid")
+        exit()
+    
+    while (1):
         ret, frame = src_vid.read()
+        display = cv2.rectangle(frame.copy(), start, end, color, thickness)
+        ROI = frame[934:970, 55:450].copy()
+        
         if not ret:
             break
 
         name = './image/frame' + str(index) + '.png'
             # This will be the naming convention for the screenshots
-        if index % 10 == 0:
+        if index % 400 == 0:
             print("capturing..." + name)
-            cv2.imwrite(name, frame)
+            cv2.imwrite(name, ROI)
         index = index + 1
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
