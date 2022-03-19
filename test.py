@@ -15,12 +15,12 @@ image = "Image"
 def get_Text():
     for i in os.listdir(image):
         print(str(i))
-        #my_example = Image.open(image + '/' + i)
-        IMAGE_PATH = image + '/' + i
-        reader = easyocr.Reader(['en'])
-        text = reader.readtext(IMAGE_PATH, detail=0)
+        my_example = Image.open(image + '/' + i)
+        #IMAGE_PATH = image + '/' + i
+        #reader = easyocr.Reader(['en'])
+        #text = reader.readtext(IMAGE_PATH, detail=0)
         
-        #text = pytesseract.image_to_string(my_example, lang='eng')
+        text = pytesseract.image_to_string(my_example, lang='eng')
         print(text)
 
 
