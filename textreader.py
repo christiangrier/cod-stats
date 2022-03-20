@@ -23,11 +23,6 @@ def files_Creation():
         # Video to take screenshots of for processing   
     return(src_vid)
 
-x = 55
-y = 934
-h = 36
-w = 395
-
 def gen_Img(src_vid):
     index = 0
     if not src_vid.isOpened():
@@ -42,9 +37,8 @@ def gen_Img(src_vid):
 
         name = './image/frame' + str(index) + '.png'
             # This will be the naming convention for the screenshots
-        if index % 1800 == 0:
+        if index % 10 == 0:
             print("capturing..." + name)
-            #crop = frame[y:y+h, x:x+w]
             cv2.imwrite(name, frame)
         index = index + 1
         if cv2.waitKey(10) & 0xFF == ord('q'):
@@ -57,7 +51,9 @@ def get_Text():
     for i in os.listdir(image):
         print(str(i))
         my_example = Image.open(image + '/' + i)
-        text = pytesseract.image_to_string(my_example, lang='eng')
+        x, y, w, h = 29, 426, 186, 19
+        ROI = my_example.crop((x, y, x + w, y + h))
+        text = pytesseract.image_to_string(ROI, lang='eng', config='--psm 6')
         print(text)
         
 if __name__ == '__main__':
