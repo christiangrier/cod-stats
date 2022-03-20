@@ -16,11 +16,12 @@ def files_Creation():
         pass
     
     if not os.path.exists(image):
-        os.makedirs(image)
         # Make directory if not exists
+        os.makedirs(image)
         
+    # Video to take screenshots of for processing 
     src_vid = cv2.VideoCapture('Winners_Finals_OpticVRavens.mp4')
-        # Video to take screenshots of for processing   
+          
     return(src_vid)
 
 def gen_Img(src_vid):
@@ -32,11 +33,15 @@ def gen_Img(src_vid):
     while (1):
         ret, frame = src_vid.read()
         
+        # if ret is read correctly ret is True
         if not ret:
             break
-
+        
+        # This will be the naming convention for the screenshots
         name = './image/frame' + str(index) + '.png'
-            # This will be the naming convention for the screenshots
+        
+        # Defining the framerate capture.
+        # For my case, 3fps will do the job for capturing killfeed
         if index % 10 == 0:
             print("capturing..." + name)
             cv2.imwrite(name, frame)
@@ -51,8 +56,10 @@ def get_Text():
     for i in os.listdir(image):
         print(str(i))
         my_example = Image.open(image + '/' + i)
+        # Defining the crop range pytesseract to read from
         x, y, w, h = 29, 426, 186, 19
         ROI = my_example.crop((x, y, x + w, y + h))
+        # Writing the image to a string for storage
         text = pytesseract.image_to_string(ROI, lang='eng', config='--psm 6')
         print(text)
         
