@@ -1,10 +1,12 @@
 from PIL import Image
 from matplotlib import image
+from natsort import natsorted
 import pytesseract
 import pyautogui
 import os
 import cv2
 import numpy as np
+import pandas as pd 
 
 
 image = 'Image'
@@ -53,7 +55,7 @@ def gen_Img(src_vid):
     cv2.destroyAllWindows()
     
 def get_Text():
-    for i in os.listdir(image):
+    for i in natsorted(os.listdir(image)):
         print(str(i))
         my_example = Image.open(image + '/' + i)
         # Defining the crop range pytesseract to read from

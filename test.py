@@ -4,6 +4,7 @@ from PIL import Image, ImageGrab
 from PIL import *
 import pytesseract
 import os
+from natsort import natsorted
 import cv2
 
 image = "Image"
@@ -15,7 +16,7 @@ image = "Image"
 # print(result)
 
 def get_Text():
-    for i in os.listdir(image):
+    for i in natsorted(os.listdir(image)):
         print(str(i))
         my_example = Image.open(image + '/' + i)
         #x, y, w, h = 55, 934, 395, 36
