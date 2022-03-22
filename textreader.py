@@ -22,7 +22,7 @@ def files_Creation():
         os.makedirs(image)
         
     # Video to take screenshots of for processing 
-    src_vid = cv2.VideoCapture('Winners_Finals_OpticVRavens.mp4')
+    src_vid = cv2.VideoCapture('Input video file name here')
           
     return(src_vid)
 
@@ -68,7 +68,8 @@ def get_Text():
     
     #creating a data from for easy analysis with pandas
     df = pd.DataFrame(appended_Data)
-    print(df)
+    df.to_csv('Input csv name here')
+    #print(df)
         
 if __name__ == '__main__':
     vid = files_Creation()
