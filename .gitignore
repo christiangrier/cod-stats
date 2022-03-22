@@ -1,6 +1,8 @@
 .venv 
 *.mp4
 
+*.xlsx
+
 Image/*
 test_Image/*
 
