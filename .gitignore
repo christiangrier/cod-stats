@@ -2,3 +2,5 @@
 *.mp4
 
 Image/*
+test_Image/*
+test.py

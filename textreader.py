@@ -55,15 +55,20 @@ def gen_Img(src_vid):
     cv2.destroyAllWindows()
     
 def get_Text():
+    appended_Data = []
     for i in natsorted(os.listdir(image)):
-        print(str(i))
+        #print(str(i))
         my_example = Image.open(image + '/' + i)
-        # Defining the crop range pytesseract to read from
         x, y, w, h = 29, 426, 186, 19
         ROI = my_example.crop((x, y, x + w, y + h))
-        # Writing the image to a string for storage
         text = pytesseract.image_to_string(ROI, lang='eng', config='--psm 6')
-        print(text)
+        #string to list for DataFrame preparations
+        appended_Data.append(text)
+        #print(appended_Data)
+    
+    #creating a data from for easy analysis with pandas
+    df = pd.DataFrame(appended_Data)
+    print(df)
         
 if __name__ == '__main__':
     vid = files_Creation()
