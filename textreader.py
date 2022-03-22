@@ -1,6 +1,7 @@
 from PIL import Image
 from matplotlib import image
 from natsort import natsorted
+from openpyxl.workbook import Workbook
 import pytesseract
 import pyautogui
 import os
@@ -66,7 +67,7 @@ def get_Text():
         appended_Data.append(text)
         #print(appended_Data)
     
-    #creating a data from for easy analysis with pandas
+    #creating a dataframe for easy analysis with pandas
     df = pd.DataFrame(appended_Data)
     df.to_csv('Input csv name here')
     #print(df)
