@@ -23,7 +23,7 @@ def files_Creation():
         os.makedirs(image)
         
     # Video to take screenshots of for processing 
-    src_vid = cv2.VideoCapture('OpticVRavens.mp4')
+    src_vid = cv2.VideoCapture('./video/OpticVRavens.mp4')
           
     return(src_vid)
 
@@ -43,9 +43,10 @@ def gen_Img(src_vid):
         # This will be the naming convention for the screenshots
         name = './image/frame' + str(index) + '.png'
         
-        # Defining the framerate capture.
-        # For my case, 3fps will do the job for capturing killfeed
-        if index % 10 == 0:
+        # Defining the framerate capture. 
+        # Require 5fps for high pace moments where teams are trading quickly
+        # Noticed that going any high provides no added benefit
+        if index % 6 == 0:
             print("capturing..." + name)
             cv2.imwrite(name, frame)
         index = index + 1
