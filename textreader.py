@@ -23,7 +23,7 @@ def files_Creation():
         os.makedirs(image)
         
     # Video to take screenshots of for processing 
-    src_vid = cv2.VideoCapture('Input video file name here')
+    src_vid = cv2.VideoCapture('OpticVRavens.mp4')
           
     return(src_vid)
 
@@ -64,12 +64,13 @@ def get_Text():
         ROI = my_example.crop((x, y, x + w, y + h))
         text = pytesseract.image_to_string(ROI, lang='eng', config='--psm 6')
         #string to list for DataFrame preparations
-        appended_Data.append(text)
+        split = text.split()
+        appended_Data.append(split)
         #print(appended_Data)
     
     #creating a dataframe for easy analysis with pandas
     df = pd.DataFrame(appended_Data)
-    df.to_csv('Input csv name here')
+    df.to_excel('TXvLON.csv')
     #print(df)
         
 if __name__ == '__main__':
