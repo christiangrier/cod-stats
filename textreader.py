@@ -4,6 +4,7 @@ from natsort import natsorted
 from openpyxl.workbook import Workbook
 import pytesseract
 import pyautogui
+import itertools
 import os
 import cv2
 import numpy as np
@@ -23,7 +24,7 @@ def files_Creation():
         os.makedirs(image)
         
     # Video to take screenshots of for processing 
-    src_vid = cv2.VideoCapture('./video/OpticVRavens.mp4')
+    src_vid = cv2.VideoCapture('./video/OvRMap1.mp4')
           
     return(src_vid)
 
@@ -67,11 +68,12 @@ def get_Text():
         #string to list for DataFrame preparations
         split = text.split()
         appended_Data.append(split)
+        appended_Data = [g for g, _ in itertools.groupby(appended_Data)]
         #print(appended_Data)
     
     #creating a dataframe for easy analysis with pandas
     df = pd.DataFrame(appended_Data)
-    df.to_excel('TXvLON.csv')
+    df.to_excel('TXvLON.xlsx')
     #print(df)
         
 if __name__ == '__main__':
