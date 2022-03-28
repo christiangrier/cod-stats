@@ -45,9 +45,9 @@ def gen_Img(src_vid):
         name = './image/frame' + str(index) + '.png'
         
         # Defining the framerate capture. 
-        # Require 5fps for high pace moments where teams are trading quickly
-        # Noticed that going any high provides no added benefit
-        if index % 6 == 0:
+        # Require 10fps for high pace moments where teams are trading quickly
+        # Noticed that going any high provides no added benefit 
+        if index % 3 == 0:
             print("capturing..." + name)
             cv2.imwrite(name, frame)
         index = index + 1
@@ -62,9 +62,11 @@ def get_Text():
     for i in natsorted(os.listdir(image)):
         #print(str(i))
         my_example = Image.open(image + '/' + i)
+        #Defining the img crop range 
         x, y, w, h = 29, 426, 186, 19
         ROI = my_example.crop((x, y, x + w, y + h))
         text = pytesseract.image_to_string(ROI, lang='eng', config='--psm 6')
+        text = text + i
         #string to list for DataFrame preparations
         split = text.split()
         appended_Data.append(split)
